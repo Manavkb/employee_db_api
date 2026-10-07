@@ -6,10 +6,12 @@ database.py - connect to the database.
     Base          -> parent class for every table model
     get_db()      -> dependency: one session per request, always closed
 """
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-DATABASE_URL = "sqlite:///./employees.db"          # a file next to main.py
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./employees.db")
 
 engine = create_engine(
     DATABASE_URL,
